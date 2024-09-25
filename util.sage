@@ -229,22 +229,24 @@ def moebius_coefficient(polynomial, degree_per_variable, total_degree, variable_
 
     binom_cache = {}
     pow_cache = {}
-
-    for key in coefficient_dict.keys():
+    
+    for key in coefficient_dict.keys():   
+        
         partial_sums = []
         for k in range(len(key)):
             ck = key[k]
             tot_deg_k = total_degree[k]
             deg_k = degree_per_variable[k]
+            
             a_k, b_k = variable_ranges[k]
-
+            
             partial_sum = 0
             for pp in range(ck + 1):
                 binom_ck_pp = binom_cache.get((ck, pp))
                 if binom_ck_pp is None:
                     binom_ck_pp = binomial(ck, pp)
                     binom_cache[(ck, pp)] = binom_ck_pp
-
+                    
                 binom_tot_deg_diff = binom_cache.get((tot_deg_k - ck, deg_k - pp))
                 if binom_tot_deg_diff is None:
                     binom_tot_deg_diff = binomial(tot_deg_k - ck, deg_k - pp)
@@ -270,8 +272,26 @@ def moebius_coefficient(polynomial, degree_per_variable, total_degree, variable_
 
 
 
+def quadratic_extrema_on_interval(p, t_interval):
+    """
+    INPUT - A QUADRATIC POLYNOMIAL IN THE VARIABLE t OF THE FORM:
+    p --> p(t) = a*t^2 + b*t + c
+    t_interval ----> The bounds for t (should be a subinterval of [0,1])
 
-
+    OUTPUT - THE MINIMUM AND MAXIMUM VALUES OF p IN THE INTERVAL [t0, t1].
+    """
+    t0 = t_interval[0]
+    t1 = t_interval[1]
+    coefs = reversed(p.coefficients(t))  # Retrieve the coefficients [a, b, c]
+    a, b, c = map(lambda x: x[0], coefs)
+    
+    # Check if the critical point -b/(2*a) lies within the interval [t0, t1]
+    if t0 <= -b / (2 * a) <= t1:
+        values = [p(t=t0), p(t=t1), p(t=-b / (2 * a))]
+    else:
+        values = [p(t=t0), p(t=t1)]
+    
+    return sqrt(min(values)), sqrt(max(values))
 
 
 
