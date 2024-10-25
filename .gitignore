@@ -5,8 +5,7 @@ out
 gen
 .ipynb_checkpoints/
 .jupyter
-.Nested\ Icosahedron/
-.Nested\ Dodecahedro/
+Nested\ Icosahedron/
+Nested\ Dodecahedro/
 mamba/
-#Truncated\ Tetrahedra/
-Nested Cube/Arquivos_Cubo_C11_forca_Bruta/
+
