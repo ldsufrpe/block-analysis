@@ -3,10 +3,10 @@
 *.iml
 out
 gen
-Tecnica\ de\ Rodrigo/
 .ipynb_checkpoints/
-Nested\ Icosahedron/
-Nested\ Dodecahedro/
+.jupyter
+.Nested\ Icosahedron/
+.Nested\ Dodecahedro/
 mamba/
 #Truncated\ Tetrahedra/
 Nested Cube/Arquivos_Cubo_C11_forca_Bruta/
