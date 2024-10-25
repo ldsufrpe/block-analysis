@@ -5,6 +5,7 @@ out
 gen
 .ipynb_checkpoints/
 .jupyter
+.jupyter/desktop-workspaces
 Nested\ Icosahedron/
 Nested\ Dodecahedro/
 mamba/
