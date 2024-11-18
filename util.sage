@@ -270,6 +270,56 @@ def moebius_coefficient(polynomial, degree_per_variable, total_degree, variable_
 
     return total_sum
 
+def moebius_sign(polynomial, n_uplas, total_degree, all_variable_ranges, coefficient_dict):
+    """
+    Determines the sign of Möbius coefficients for a given polynomial expression.
+    
+    **Parameters:**
+    - `polynomial`: The polynomial expression.
+    - `n_uplas`: list of list of degree per variables
+    - `all_variable_ranges`: A list of all possible variable ranges.Ex. [[0, 1/2],[1/2, 1]]
+    - `total_degree`: The total degree of the polynomial.
+    - `coefficient_dict`: A dictionary where the keys are tuples of degrees and the values are the coefficients of the monomials.
+    
+    **Returns:**
+    - Prints the final set of coefficient signs for each variable range. If both 1 and -1 are present in the set, it terminates early.
+    
+    **Examples:**
+    
+    """
+    import time 
+    start_time = time.time()
+    for variable_ranges in all_variable_ranges:
+        sign_coeff_set = set()
+
+        print(f"Starting to calculate the signs of the Möbius coefficients for t in {variable_ranges[0]}")
+        print("\n")
+
+        for i, degree_per_variable in enumerate(n_uplas):
+            c = moebius_coefficient(polynomial, degree_per_variable, total_degree, variable_ranges, coefficient_dict)
+
+            if i > 0 and i % 100 == 0:
+                elapsed_time = time.time() - start_time
+                elapsed_time_minutes = elapsed_time / 60
+                print(f"Iteration: {i}, Elapsed time: {elapsed_time_minutes:.2f} minutes")
+                print("Partial set of signs of the Möbius coefficients:", sign_coeff_set)
+                print("\n")
+
+            
+            if c.is_zero():
+                continue
+            else:
+                sign_coeff = sign(c.simplify_full())
+                sign_coeff_set.add(sign_coeff)
+            
+            if 1 in sign_coeff_set and -1 in sign_coeff_set:
+                print(f"Terminating at iteration {i} because the set contains 1 and -1.")
+                break
+        elapsed_time = time.time() - start_time
+        elapsed_time_minutes = elapsed_time / 60
+        print(f"Final iteration: {i}. Elapsed time: {elapsed_time_minutes:.2f} minutes")
+        print(f"Set of signs of the Möbius coefficients for t in {variable_ranges[0]}: {sign_coeff_set}.")
+        print("\n")
 
 
 def quadratic_extrema_on_interval(p, t_interval):
