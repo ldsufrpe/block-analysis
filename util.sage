@@ -5,57 +5,6 @@ assume(c>0)
 var('u,v')
 assume (u>0, v>0)
 
-
-def simplify_fractional_radicals(expr):
-    # Step 1: Separate each term of the expression into a list
-    terms = expr.operands()       
-    # If the expression has no operands, then it is a single term
-    if not terms:
-        terms = [expr]
-    
-    # List to store simplified terms
-    simplified_terms = []
-    
-    for term in terms:
-        # Step 2: Identify which expressions contain a fractional power            
-            
-        # Step 3: If it is a symbolic fractional expression, separate numerator and denominator
-        numerator = term.numerator()
-        denominator = term.denominator()
-        
-        # Step 4: Identify if the numerator or the denominator or both contain expressions with fractional powers
-        if numerator.operator() == operator.pow and not numerator.operands()[1].is_integer():
-            base, exp = numerator.operands()
-            numerator_simplified = (base.factor()**exp).simplify_real()
-            #print(base, exp)
-        else:
-            numerator_simplified = numerator
-        
-        if  denominator.operator() == operator.pow and not denominator.operands()[1].is_integer():
-            base, exp = denominator.operands()
-            denominator_simplified = (base.factor()**exp).simplify_real()
-            #print(base, exp)
-            #print(denominator_simplified )
-        else:
-            denominator_simplified = denominator
-        
-        # Step 5: Reassemble each fractional expression after the previous simplification
-        term_simplified = (numerator_simplified / denominator_simplified)
-     
-        # Add the simplified term to the list
-        simplified_terms.append(term_simplified)
-    
-    # Step 7: Reassemble the complete expression after simplifications
-    expr_simplified = sum(simplified_terms)
-    
-    return expr_simplified
-
-
-
-
-
-
-
 def simplify_expression(p, repeat=2):
     c = var('c')    
     i = 0
