@@ -14,6 +14,7 @@ By utilizing the representation theory of finite groups, this project simplifies
 - **Nested Cube/**: Contains scripts for analyzing central configurations of nested cubes.
 - **Nested Octahedra/**: Contains scripts for analyzing blocks of nested octahedra.
 - **Nested Tetrahedra/**: Contains scripts for analyzing blocks of nested tetrahedra.
+- **Example_1/**: Contains scripts for the example 1.
 - **util.sage**: Contains utility functions used across different notebooks for symbolic computations in SageMath.
 
 Each directory corresponds to a specific polyhedral configuration and contains:
